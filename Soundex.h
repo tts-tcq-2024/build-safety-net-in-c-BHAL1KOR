@@ -4,6 +4,7 @@
 #include "Soundex.h"
 #include <ctype.h>
 #include <string.h>
+#include <stdio.h>
 
 #define MAX_CODE_LENGTH 4
 
@@ -27,28 +28,40 @@ void initializeSoundex(char *soundex, char firstLetter) {
     soundex[MAX_CODE_LENGTH] = '\0';
 }
 
+void addSoundexCode(char *soundex, int *sIndex, char code, char *lastCode) {
+    if (code != '0' && code != *lastCode) {
+        soundex[(*sIndex)++] = code;
+        *lastCode = code;
+    }
+}
+
 void processCharacters(const char *name, char *soundex) {
     int sIndex = 1;
     char lastCode = getSoundexCode(soundex[0]);
 
     for (int i = 1; name[i] != '\0' && sIndex < MAX_CODE_LENGTH; i++) {
         char code = getSoundexCode(name[i]);
-        if (code != '0' && code != lastCode) {
-            soundex[sIndex++] = code;
-            lastCode = code;
-        }
+        addSoundexCode(soundex, &sIndex, code, &lastCode);
+    }
+}
+
+int isNullOrEmpty(const char *str) {
+    return str == NULL || str[0] == '\0';
+}
+
+void handleEmptyOrNullInput(char *soundex) {
+    if (soundex != NULL) {
+        soundex[0] = '\0';
     }
 }
 
 void generateSoundex(const char *name, char *soundex) {
-    if (name == NULL || soundex == NULL || name[0] == '\0') {
-        if (soundex != NULL) {
-            soundex[0] = '\0';
-        }
+    if (isNullOrEmpty(name) || soundex == NULL) {
+        handleEmptyOrNullInput(soundex);
         return;
-    }
-
+    }    
     initializeSoundex(soundex, name[0]);
     processCharacters(name, soundex);
 }
+
 #endif
