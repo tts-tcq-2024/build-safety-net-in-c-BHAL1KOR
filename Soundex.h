@@ -1,3 +1,8 @@
+//
+// pch.cpp
+//
+
+#include "pch.h"
 #ifndef SOUNDEX_H
 #define SOUNDEX_H
 
@@ -43,10 +48,28 @@ void processCharacters(const char* name, char* soundex) {
 
     }
 }
+int isNullOrEmpty(const char* str) {
+    return str == NULL || str[0] == '\0';
+}
+
+int isNumeric(const char* str) {
+    return getSoundexCode(str[0])';
+}
+void handleEmptyOrNumericInput(char* soundex) {
+    if (soundex != NULL) {
+        soundex[0] = '\0';
+    }
+}
+
 void generateSoundex(const char* name, char* soundex) {
-    initializeSoundex(soundex, name[0]);
-    soundex[0] = toupper(name[0]);
-    processCharacters(name, soundex);
+    if (isNullOrEmpty(name) || isNumeric(name)) {
+        handleEmptyOrNumericInput(soundex);
+    }
+    else{
+        initializeSoundex(soundex, name[0]);
+        soundex[0] = toupper(name[0]);
+        processCharacters(name, soundex);
+    }
 }
 
 #endif
