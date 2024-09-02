@@ -1,7 +1,7 @@
 #ifndef SOUNDEX_H
 #define SOUNDEX_H
 
-#include "Soundex.h"
+#include <gtest/gtest.h>
 #include <ctype.h>
 #include <string.h>
 #include <stdio.h>
