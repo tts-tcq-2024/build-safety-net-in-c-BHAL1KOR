@@ -52,7 +52,7 @@ int isNullOrEmpty(const char* str) {
 }
 
 int isNumeric(const char* str) {
-    return getSoundexCode(str[0])';
+    return getSoundexCode(str[0]);
 }
 void handleEmptyOrNumericInput(char* soundex) {
     if (soundex != NULL) {
