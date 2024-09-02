@@ -2,7 +2,6 @@
 // pch.cpp
 //
 
-#include "pch.h"
 #ifndef SOUNDEX_H
 #define SOUNDEX_H
 
