@@ -22,21 +22,21 @@ TEST(SoudexTestsuite, TestingInvalidResultUsecases) {
   char soundex[MAX_CODE_LENGTH +1];
 //"Tymczak" should yields "T522" not "T520"
   generateSoundex("Tymczak", soundex);
-  EXPECT_NEQ(strcmp(soundex, "T522"),0);
+  EXPECT_NE(strcmp(soundex, "T522"),0);
 
   generateSoundex("Tymczak", soundex);
   EXPECT_EQ(strcmp(soundex, "T520"),0);
 
 //"Pfister" should yields "P236" not "P123" 
   generateSoundex("Pfister", soundex);
-  EXPECT_NEQ(strcmp(soundex, "P236"),0); 
+  EXPECT_NE(strcmp(soundex, "P236"),0); 
 
   generateSoundex("Pfister", soundex);
   EXPECT_EQ(strcmp(soundex, "P123"),0); 
 
 // "Honeyman" should yields "H555".
   generateSoundex("Honeyman", soundex);
-  EXPECT_NEQ(strcmp(soundex, "H555"),0);
+  EXPECT_NE(strcmp(soundex, "H555"),0);
 
   generateSoundex("Honeyman", soundex);
   EXPECT_EQ(strcmp(soundex, "H500"),0);
