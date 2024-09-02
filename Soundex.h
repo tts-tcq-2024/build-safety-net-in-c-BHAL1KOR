@@ -24,7 +24,7 @@ void generateSoundex(const char* name, char* soundex){
     int i, j = 1;
     char lastCode, currentCode;
 
-    output[0] = toupper(name[0]);
+    soundex[0] = toupper(name[0]);
     lastCode = getSoundexCode(name[0]);
 
     for (i = 1; name[i] != '\0' && j < 4; i++) {
