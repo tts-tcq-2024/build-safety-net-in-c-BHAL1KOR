@@ -67,14 +67,4 @@ void generateSoundex(const char *name, char *soundex) {
     soundex[length] = '\0'; // Null-terminate the soundex string
     paddingSoundex(soundex);
 }
-
-int main() {
-    char name[] = "Example";
-    char soundex[5]; // Enough space for 4 characters plus null terminator
-
-    generateSoundex(name, soundex);
-    printf("Soundex of %s: %s\n", name, soundex);
-
-    return 0;
-}
 #endif
