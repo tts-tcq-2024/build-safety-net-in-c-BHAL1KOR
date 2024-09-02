@@ -22,7 +22,7 @@ char getSoundexCode(char c) {
     if (c >= 'A' && c <= 'Z') {
         return soundexTable[c - 'A'];
     }
-    return '0'; // For non-alphabetic characters
+    return NULL; // For non-alphabetic characters
 }
 
 void addSoundexCode(char* soundex, int* sIndex, char code, char* lastCode) {
@@ -52,7 +52,14 @@ int isNullOrEmpty(const char* str) {
 }
 
 int isNumeric(const char* str) {
-    return !getSoundexCode(str[0]);
+   char value = getSoundexCode(str[0]);
+   if (value == NULL)
+   {
+       return 1;
+   }
+   else {
+       return 0;
+   }
 }
 void handleEmptyOrNumericInput(char* soundex) {
     if (soundex != NULL) {
