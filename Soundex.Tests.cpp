@@ -6,6 +6,7 @@ TEST(SoudexTestsuite, ReplacesConsonantsWithAppropriateDigits) {
   char soundex[MAX_CODE_LENGTH+1];
 
     generateSoundex("Robert", soundex);
+   printf(" soundex = %s",soundex);
     assert(strcmp(soundex, "R163") == 0);
 
     generateSoundex("Rupert", soundex);
