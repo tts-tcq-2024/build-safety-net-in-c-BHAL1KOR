@@ -1,3 +1,8 @@
+#ifndef SOUNDEX_H
+#define SOUNDEX_H
+
+#include "Soundex.h"
+
 #include <stdio.h>
 #include <ctype.h>
 #include <string.h>  
