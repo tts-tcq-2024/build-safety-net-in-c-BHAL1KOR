@@ -3,7 +3,7 @@
 
 TEST(SoudexTestsuite, ReplacesConsonantsWithAppropriateDigits) {
  //AAA 
-  char soundex[5];
+  char soundex[MAX_CODE_LENGTH+1];
   generateSoundex("AX", soundex);
   ASSERT_EQ(soundex,"A200");
 
