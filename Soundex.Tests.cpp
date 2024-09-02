@@ -40,3 +40,4 @@ TEST(SoudexTestsuite, TestingInvalidResultUsecases) {
 
   generateSoundex("Honeyman", soundex);
   EXPECT_EQ(strcmp(soundex, "H500"),0);
+}
