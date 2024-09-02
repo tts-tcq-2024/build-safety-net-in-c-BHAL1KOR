@@ -42,7 +42,7 @@ TEST(SoudexTestsuite, TestingInvalidResultUsecases) {
 	EXPECT_EQ(strcmp(soundex, "H500"), 0);
 }
 
-TEST(SoudexTestsuite, TestForIntegres) {
+TEST(SoudexTestsuite, TestForOtherthanStringInput) {
 	char soundex[MAX_CODE_LENGTH + 1];
 	//"Tymczak" should yields "T522" not "T520"
 	generateSoundex("123456", soundex);
