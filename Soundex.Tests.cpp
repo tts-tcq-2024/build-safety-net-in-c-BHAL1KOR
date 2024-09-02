@@ -4,30 +4,31 @@
 TEST(SoudexTestsuite, ReplacesConsonantsWithAppropriateDigits) {
  //AAA 
   char soundex[MAX_CODE_LENGTH+1];
-  generateSoundex("AX", soundex);
-  ASSERT_EQ(soundex,"A200");
 
-  generateSoundex("Robert", soundex);
-  ASSERT_EQ(soundex, "R163");
+    generateSoundex("Robert", soundex);
+    assert(strcmp(soundex, "R163") == 0);
 
-  generateSoundex("Rupert", soundex);
-  ASSERT_EQ(soundex, "R163");
+    generateSoundex("Rupert", soundex);
+    assert(strcmp(soundex, "R163") == 0);
 
-  generateSoundex("Rubin", soundex);
-  ASSERT_EQ(soundex, "R150");
+    generateSoundex("Rubin", soundex);
+    assert(strcmp(soundex, "R150") == 0);
 
-  generateSoundex("Ashcraft", soundex);
-  ASSERT_EQ(soundex, "A261");
+    generateSoundex("Ashcraft", soundex);
+    assert(strcmp(soundex, "A261") == 0);
 
-  generateSoundex("Tymczak", soundex);
-  ASSERT_EQ(soundex, "T522");
+    generateSoundex("Tymczak", soundex);
+    assert(strcmp(soundex, "T522") == 0);
 
-  generateSoundex("Pfister", soundex);
-  ASSERT_EQ(soundex, "P236");
+    generateSoundex("Pfister", soundex);
+    assert(strcmp(soundex, "P236") == 0);
 
-  generateSoundex("", soundex);
-  ASSERT_EQ(soundex, "");
+    generateSoundex("AX", soundex);
+    assert(strcmp(soundex, "A200") == 0);
 
-  generateSoundex(NULL, soundex);
-  ASSERT_EQ(soundex, "");
+    generateSoundex("", soundex);
+    assert(strcmp(soundex, "") == 0);
+
+    generateSoundex(NULL, soundex);
+    assert(strcmp(soundex, "") == 0);
 }
