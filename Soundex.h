@@ -20,24 +20,29 @@ char getSoundexCode(char c) {
     return '0'; // For non-alphabetic characters
 }
 
-void generateSoundex(const char* name, char* soundex){
-    int i, j = 1;
-    char lastCode, currentCode;
-
-    soundex[0] = toupper(name[0]);
-    lastCode = getSoundexCode(name[0]);
-
-    for (i = 1; name[i] != '\0' && j < 4; i++) {
-        currentCode = getSoundexCode(name[i]);
-        if (currentCode != 0 && currentCode != lastCode) {
-            soundex[j++] = '0' + currentCode;
-        }
-        lastCode = currentCode;
+void addSoundexCode(char* soundex, int* sIndex, char code, char* lastCode) {
+    if (code != '0' && code != *lastCode) {
+        soundex[(*sIndex)++] = code;
     }
-
-    while (j < 4) {
-        soundex[j++] = '0';
-    }
-    soundex[j] = '\0';
 }
+
+void generateSoundex(const char* name, char* soundex) {
+    int len = strlen(name);
+    soundex[0] = toupper(name[0]);
+    int sIndex = 1;
+
+    for (int i = 1; i < len && sIndex < 4; i++) {
+        char code = getSoundexCode(name[i]);
+        addSoundexCode(soundex, &sIndex, code, &soundex[sIndex - 1]);
+       
+    }
+
+    while (sIndex < 4) {
+        soundex[sIndex++] = '0';
+    }
+
+    soundex[4] = '\0';
+    printf(" soundex= %s \r\n", soundex);
+}
+
 #endif
