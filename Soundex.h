@@ -26,23 +26,26 @@ void addSoundexCode(char* soundex, int* sIndex, char code, char* lastCode) {
     }
 }
 
-void generateSoundex(const char* name, char* soundex) {
+void initializeSoundex(char* soundex, char firstLetter) {
+    soundex[0] = toupper(firstLetter);
+    for (int i = 1; i < MAX_CODE_LENGTH; i++) {
+        soundex[i] = '0';
+    }
+    soundex[MAX_CODE_LENGTH] = '\0';
+}
+void processCharacters(const char* name, char* soundex) {
     int len = strlen(name);
-    soundex[0] = toupper(name[0]);
     int sIndex = 1;
-
     for (int i = 1; i < len && sIndex < 4; i++) {
         char code = getSoundexCode(name[i]);
         addSoundexCode(soundex, &sIndex, code, &soundex[sIndex - 1]);
-       
-    }
 
-    while (sIndex < 4) {
-        soundex[sIndex++] = '0';
     }
-
-    soundex[4] = '\0';
-    printf(" soundex= %s \r\n", soundex);
+}
+void generateSoundex(const char* name, char* soundex) {
+    initializeSoundex(soundex, name[0]);
+    soundex[0] = toupper(name[0]);
+    processCharacters(name, soundex);
 }
 
 #endif
