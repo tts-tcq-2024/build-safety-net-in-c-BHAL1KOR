@@ -1,56 +1,42 @@
 #include "Soundex.h"
 
-TEST(SoudexTestsuite, ReplacesConsonantsWithAppropriateDigits) {
-	char soundex[MAX_CODE_LENGTH + 1];
-	generateSoundex("Robert", soundex);
-	EXPECT_EQ(strcmp(soundex, "R163"), 0);
-
-	generateSoundex("Rupert", soundex);
-	EXPECT_EQ(strcmp(soundex, "R163"), 0);
-
-	generateSoundex("Rubin", soundex);
-	EXPECT_EQ(strcmp(soundex, "R150"), 0);
-
-	generateSoundex("Ashcraft", soundex);
-	EXPECT_EQ(strcmp(soundex, "A261"), 0);
-
-	generateSoundex("Ashcroft", soundex);
-	EXPECT_EQ(strcmp(soundex, "A261"), 0);
-
-}
-TEST(SoudexTestsuite, TestingInvalidResultUsecases) {
-	char soundex[MAX_CODE_LENGTH + 1];
-	//"Tymczak" should yields "T522" not "T520"
-	generateSoundex("Tymczak", soundex);
-	EXPECT_NE(strcmp(soundex, "T522"), 0);
-
-	generateSoundex("Tymczak", soundex);
-	EXPECT_EQ(strcmp(soundex, "T520"), 0);
-
-	//"Pfister" should yields "P236" not "P123" 
-	generateSoundex("Pfister", soundex);
-	EXPECT_NE(strcmp(soundex, "P236"), 0);
-
-	generateSoundex("Pfister", soundex);
-	EXPECT_EQ(strcmp(soundex, "P123"), 0);
-
-	// "Honeyman" should yields "H555".
-	generateSoundex("Honeyman", soundex);
-	EXPECT_NE(strcmp(soundex, "H555"), 0);
-
-	generateSoundex("Honeyman", soundex);
-	EXPECT_EQ(strcmp(soundex, "H500"), 0);
+TEST( SoudexTestsuite, EncodeCharacterWithEquivalentNumber )
+{
+    EXPECT_EQ(generateSoundex("Ashcraft"), "A261");
+    EXPECT_EQ(generateSoundex("Bach"), "B200");
+    EXPECT_EQ(generateSoundex("Pfister"), "P236");
+    EXPECT_EQ(generateSoundex("Honeyman"), "H555");
 }
 
-TEST(SoudexTestsuite, TestForOtherthanStringInput) {
-	char soundex[MAX_CODE_LENGTH + 1];
-	//"Tymczak" should yields "T522" not "T520"
-	generateSoundex("123456", soundex);
-	EXPECT_EQ(strcmp(soundex, ""), 0);
+TEST(SoudexTestsuite, DroppingOccurrencesOfVowelsAndSpecificConsonants) {
+    EXPECT_EQ(generateSoundex("Aeiouyhw"), "A000");
+    EXPECT_EQ(generateSoundex("Hello"), "H400");
+    EXPECT_EQ(generateSoundex("Soundex"), "S532");
+    EXPECT_EQ(generateSoundex("Algorithm"), "A426");
+}
 
-	generateSoundex("", soundex);
-	EXPECT_EQ(strcmp(soundex, ""), 0);
+TEST(SoudexTestsuite, ReplacingConsonantsWithDigits) {
+    EXPECT_EQ(generateSoundex("Bfpv"), "B110");
+    EXPECT_EQ(generateSoundex("Cgjkqsxz"), "C222");
+    EXPECT_EQ(generateSoundex("Algorithm"), "A426");
+    EXPECT_EQ(generateSoundex("Soundex"), "S532");
+}
 
-	generateSoundex(NULL, soundex);
-	EXPECT_EQ(strcmp(soundex, ""), 0);
+TEST(SoundexTestsuite, SimilarSoundingWordsHaveSameSoundexOutput) {
+    EXPECT_EQ(generateSoundex("Robert"), generateSoundex("Rupert"));
+    EXPECT_EQ(generateSoundex("Rubin"), generateSoundex("Rabin"));
+    EXPECT_EQ(generateSoundex("Ashcraft"), generateSoundex("Ashcroft"));
+    EXPECT_EQ(generateSoundex("Jackson"), generateSoundex("Jaxen"));
+}
+
+TEST(SoundexTestsuite, EmptyInputReturnsEmptyOutput) {
+    EXPECT_EQ(generateSoundex(""), ""); 
+    EXPECT_EQ(generateSoundex(NULL), "");
+}
+
+TEST(SoundexTestsuite, PadsWithZerosIfInputLessThanFourCharacters) {
+    EXPECT_EQ(generateSoundex("A"), "A000");
+    EXPECT_EQ(generateSoundex("AB"), "A100");
+    EXPECT_EQ(generateSoundex("ABC"), "A120");
+    EXPECT_EQ(generateSoundex("D"), "D000");
 }
