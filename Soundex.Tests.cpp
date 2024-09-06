@@ -36,14 +36,20 @@ TEST(SoudexTestsuite, ReplacingConsonantsWithDigits) {
 }
 
 TEST(SoundexTestsuite, SimilarSoundingWordsHaveSameSoundexOutput) {
-    generateSoundex("Robert", soundex);
-    EXPECT_EQ(strcmp(soundex, generateSoundex("Rupert")), 0);
-    generateSoundex("Rubin", soundex);
-    EXPECT_EQ(strcmp(soundex, generateSoundex("Rabin")), 0);
-    generateSoundex("Ashcraft", soundex);
-    EXPECT_EQ(strcmp(soundex, generateSoundex("Ashcroft")), 0);
-    generateSoundex("Jackson", soundex);
-    EXPECT_EQ(strcmp(soundex, generateSoundex("Jaxen")), 0);
+    char soundex_1[MAX_CODE_LENGTH + 1];
+    char soundex_2[MAX_CODE_LENGTH + 1];
+    generateSoundex("Robert", soundex_1);
+    generateSoundex("Rupert", soundex_2);
+    EXPECT_EQ(strcmp(soundex_1, soundex_2), 0);    
+    generateSoundex("Rubin", soundex_1);
+    generateSoundex("Rabin", soundex_2);
+    EXPECT_EQ(strcmp(soundex_1, soundex_2), 0);    
+    generateSoundex("Ashcraft", soundex_1);
+    generateSoundex("Ashcroft", soundex_2);
+    EXPECT_EQ(strcmp(soundex_1, soundex_2), 0);    
+    generateSoundex("Jackson", soundex_1);
+    generateSoundex("Jaxen", soundex_2);
+    EXPECT_EQ(strcmp(soundex_1, soundex_2), 0);
 }
 
 TEST(SoundexTestsuite, EmptyInputReturnsEmptyOutput) {
