@@ -57,6 +57,8 @@ TEST(SoundexTestsuite, EmptyInputReturnsEmptyOutput) {
     EXPECT_EQ(strcmp(soundex, ""), 0);
     generateSoundex(NULL, soundex);
     EXPECT_EQ(strcmp(soundex, ""), 0);
+    generateSoundex("1234", soundex);
+    EXPECT_EQ(strcmp(soundex, ""), 0);
 }
 
 
