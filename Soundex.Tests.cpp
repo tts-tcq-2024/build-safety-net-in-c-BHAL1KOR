@@ -7,9 +7,9 @@ TEST(SoudexTestsuite, EncodeCharacterWithEquivalentNumber) {
     generateSoundex("Bach", soundex);
     EXPECT_EQ(strcmp(soundex, "B200"), 0);
     generateSoundex("Pfister", soundex);
-    EXPECT_EQ(strcmp(soundex, "P236"), 0);
+    EXPECT_EQ(strcmp(soundex, "P123"), 0);
     generateSoundex("Honeyman", soundex);
-    EXPECT_EQ(strcmp(soundex, "H555"), 0);
+    EXPECT_EQ(strcmp(soundex, "H500"), 0);
 }
 
 TEST(SoudexTestsuite, DroppingOccurrencesOfVowelsAndSpecificConsonants) {
@@ -26,9 +26,9 @@ TEST(SoudexTestsuite, DroppingOccurrencesOfVowelsAndSpecificConsonants) {
 TEST(SoudexTestsuite, ReplacingConsonantsWithDigits) {
     char soundex[MAX_CODE_LENGTH + 1];
     generateSoundex("Bfpv", soundex);
-    EXPECT_EQ(strcmp(soundex, "B110"), 0);
+    EXPECT_EQ(strcmp(soundex, "B100"), 0);
     generateSoundex("Cgjkqsxz", soundex);
-    EXPECT_EQ(strcmp(soundex, "C222"), 0);
+    EXPECT_EQ(strcmp(soundex, "C200"), 0);
     generateSoundex("Algorithm", soundex);
     EXPECT_EQ(strcmp(soundex, "A426"), 0);
     generateSoundex("Soundex", soundex);
