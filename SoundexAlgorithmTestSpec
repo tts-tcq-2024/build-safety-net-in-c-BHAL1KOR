@@ -15,9 +15,9 @@ Then:
 
 Examples:
   word	      soundex_code
-Ashcraft	    A261
-Bach	        B200
-Pfister	      P123
+Ashcraft		A261
+Bach           	B200
+Pfister        	P123
 Honeyman    	H500
 
     
@@ -33,7 +33,7 @@ Examples:
 word	      soundex_code
 Aeiouyhw    	A000
 Hello        	H400
-Soundex	      S532
+Soundex	      	S532
 Algorithm	    A426
 
   
@@ -63,10 +63,10 @@ Then:
   
 Examples:
 word1	      word2	      soundex_code
-Robert    	Rupert	    R163
-Rubin	      Rabin      	R150
-Ashcraft  	Ashcroft  	A261
-Jackson    	Jaxen      	J250
+Robert    	Rupert	   		 R163
+Rubin	    Rabin      		 R150
+Ashcraft  	Ashcroft   	     A261
+Jackson    	Jaxen      	     J250
 
   
 Scenario 5: Empty input should return empty output
@@ -79,7 +79,7 @@ Then:
 
 Examples:
 input  	soundex_code
-""	    ""
+ ""	     ""
 
   
 Scenario 6: Padding with zeros if input is less than four characters
@@ -93,7 +93,7 @@ Then:
 Examples:
 short_word  	padded_soundex_code
 A	            A000
-AB	          A100
-ABC	          A120
+AB	        	A100
+ABC	            A120
 D	            D000
 
