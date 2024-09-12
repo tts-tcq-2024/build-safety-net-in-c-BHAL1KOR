@@ -1,40 +1,81 @@
+//
+// pch.cpp
+//
+
 #ifndef SOUNDEX_H
 #define SOUNDEX_H
 
-#include "Soundex.h"
+#include <gtest/gtest.h>
 #include <ctype.h>
 #include <string.h>
+#include <stdio.h>
+
+#define MAX_CODE_LENGTH 4
+
 
 char getSoundexCode(char c) {
+    static const char soundexTable[26] = {
+        '0', '1', '2', '3', '0', '1', '2', '0', '0', '2', '2', '4', '5', '5', '0', '1', '2', '6', '2', '3', '0', '1', '0', '2', '0', '2'
+    };
+
     c = toupper(c);
-    switch (c) {
-        case 'B': case 'F': case 'P': case 'V': return '1';
-        case 'C': case 'G': case 'J': case 'K': case 'Q': case 'S': case 'X': case 'Z': return '2';
-        case 'D': case 'T': return '3';
-        case 'L': return '4';
-        case 'M': case 'N': return '5';
-        case 'R': return '6';
-        default: return '0'; // For A, E, I, O, U, H, W, Y
+    if (c >= 'A' && c <= 'Z') {
+        return soundexTable[c - 'A'];
+    }
+    return NULL; // For non-alphabetic characters
+}
+
+void addSoundexCode(char* soundex, int* sIndex, char code, char* lastCode) {
+    if (code != '0' && code != *lastCode) {
+        soundex[(*sIndex)++] = code;
     }
 }
 
-void generateSoundex(const char *name, char *soundex) {
+void initializeSoundex(char* soundex, char firstLetter) {
+    soundex[0] = toupper(firstLetter);
+    for (int i = 1; i < MAX_CODE_LENGTH; i++) {
+        soundex[i] = '0';
+    }
+    soundex[MAX_CODE_LENGTH] = '\0';
+}
+void processCharacters(const char* name, char* soundex) {
     int len = strlen(name);
-    soundex[0] = toupper(name[0]);
     int sIndex = 1;
-
     for (int i = 1; i < len && sIndex < 4; i++) {
         char code = getSoundexCode(name[i]);
-        if (code != '0' && code != soundex[sIndex - 1]) {
-            soundex[sIndex++] = code;
-        }
-    }
+        addSoundexCode(soundex, &sIndex, code, &soundex[sIndex - 1]);
 
-    while (sIndex < 4) {
-        soundex[sIndex++] = '0';
     }
-
-    soundex[4] = '\0';
+}
+int isNullOrEmpty(const char* str) {
+    return str == NULL || str[0] == '\0';
 }
 
-#endif // SOUNDEX_H
+int isNumeric(const char* str) {
+   char value = getSoundexCode(str[0]);
+   if (value == NULL)
+   {
+       return 1;
+   }
+   else {
+       return 0;
+   }
+}
+void handleEmptyOrNumericInput(char* soundex) {
+    if (soundex != NULL) {
+        soundex[0] = '\0';
+    }
+}
+
+void generateSoundex(const char* name, char* soundex) {
+    if (isNullOrEmpty(name) || isNumeric(name)) {
+        handleEmptyOrNumericInput(soundex);
+    }
+    else{
+        initializeSoundex(soundex, name[0]);
+        soundex[0] = toupper(name[0]);
+        processCharacters(name, soundex);
+    }
+}
+
+#endif
