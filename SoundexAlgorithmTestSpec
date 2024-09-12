@@ -50,7 +50,7 @@ word	      soundex_code
 Bfpv	        B100
 Cgjkqsxz    	C200
 Algorithm    	A426
-Soundex      	S532
+Soundex        	S532
 
   
 Scenario 4: Similar sounding words should have the same Soundex output
@@ -63,8 +63,8 @@ Then:
   
 Examples:
 word1	      word2	      soundex_code
-Robert    	Rupert	   		 R163
-Rubin	    Rabin      		 R150
+Robert    	Rupert           R163
+Rubin	      Rabin      		   R150
 Ashcraft  	Ashcroft   	     A261
 Jackson    	Jaxen      	     J250
 
@@ -93,7 +93,7 @@ Then:
 Examples:
 short_word  	padded_soundex_code
 A	            A000
-AB	        	A100
+AB            A100
 ABC	            A120
 D	            D000
 
